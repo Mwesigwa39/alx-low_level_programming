@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 /**
  * main - entry point
@@ -8,19 +9,28 @@
  */
 int main(void)
 {
-	long num = 612852475143;
-	long div = 2;
-	long largPrimF = 0;
+	long int n;
+	long int max;
+	long int i;
 
-	while (num != 0)
+	n = 612852475143;
+	max = -1;
+
+	while (n % 2 == 0)
 	{
-		if (num % div == 0)
-		{
-			num = num / div;
-			largPrimF = div;
-		}
-		div += 1;
+		max = 2;
+		n /= 2;
 	}
-	printf("%ld\n", largPrimF);
+	for (i = 3; i <= sqrt(n); i = i + 2)
+	{
+		while (n % i == 0)
+		{
+			max = i;
+			n = n / i;
+		}
+	}
+	if (n > 2)
+		max = n;
+	printf("%ld\n", max);
 	return (0);
 }
